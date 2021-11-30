@@ -3,7 +3,7 @@
       >
     <input class="tag__checkbox" type="checkbox" :checked="isChecked" :value="value" @change="updateInput"/>
     <span class="tag__title">{{ price }}₽</span>
-    <span class="tag__descr">{{ duration }} </span>
+    <span class="tag__description">{{ duration }} </span>
   </div>
 </template>
 
@@ -65,12 +65,6 @@ export default {
         this.$emit('change', isChecked ? this.trueValue : this.falseValue)
       }
     },
-
-    // toggle (e) {
-    //   console.log(e.target);
-    //   this.clicked = !this.clicked;
-    //   this.$emit('toggled')
-    // }
   }
 }
 </script>
@@ -106,13 +100,13 @@ export default {
   color: #000000;
 }
 
-.tag .tag__descr {
+.tag .tag__description{
   padding-left: 5px;
   color: #545353;
 }
 
 .tag--active .tag__title,
-.tag--active .tag__descr {
+.tag--active .tag__description{
   color: #FFFFFF;
 }
 
@@ -121,7 +115,7 @@ export default {
 }
 
 .tag__clicked .tag__title,
-.tag__clicked .tag__descr {
+.tag__clicked .tag__description{
   color: #FFFFFF;
 }
 
@@ -133,7 +127,7 @@ export default {
   color: #000000;
 }
 
-.tag:hover .tag__descr {
+.tag:hover .tag__description{
   padding-left: 5px;
   color: #545353;
 }

@@ -51,8 +51,8 @@ export default {
     updateInput (event) {
       const value = event.target.value;
 
-      let isnum = /^\d+$/.test(value);
-      if (!isnum) {
+      const isNumber = /^\d+$/.test(value);
+      if (!isNumber) {
         this.error = true;
         return;
       }
