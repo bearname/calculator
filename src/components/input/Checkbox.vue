@@ -1,19 +1,51 @@
 <template>
   <label class="container">
-    <input type="checkbox" :disabled="disabled">
+    {{label}}
+    <input
+        type="checkbox" :value="val" v-model="model"
+        :disabled="disabled"
+    >
     <span class="checkmark"></span>
   </label>
 </template>
 
 <script>
+
 export default {
   name: "Checkbox",
   props: {
+    val: {
+      type: String,
+      default: ''
+    },
+    label: {
+      type: String,
+      default: ''
+    },
+    text: {
+      type: String,
+      default: ''
+    },
+    modelValue: {
+      type: Array,
+      required: true
+    },
     disabled: {
       type: Boolean,
       default: false,
     },
-  }
+  },
+  emits: ['update:modelValue'],
+  computed: {
+    model: {
+      get() {
+        return this.modelValue
+      },
+      set(value) {
+        this.$emit('update:modelValue', value)
+      }
+    }
+  },
 }
 </script>
 

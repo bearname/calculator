@@ -5,7 +5,6 @@
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
 
 import Calculator from "./views/Calculator";
 
@@ -13,7 +12,6 @@ export default {
   name: 'App',
   components: {
     Calculator,
-    // HelloWorld
   }
 }
 </script>
@@ -127,5 +125,9 @@ p {
 
 .mr-10  {
   margin-right: 10px;
+}
+
+.pt-7 {
+  padding-top: 7px;
 }
 </style>

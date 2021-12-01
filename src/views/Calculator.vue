@@ -6,14 +6,8 @@
       </div>
       <Button v-show="false"/>
     </div>
-    <!--    <button id="show-modal" @click="showModal = true">Show Modal</button>-->
-    <!-- use the modal component, pass in the prop -->
     <transition name="modal">
       <Modal v-show="showModal" @close="showModal = false">
-        <!--
-          you can use custom content here to overwrite
-          default content
-        -->
         <template v-slot:header>
           <h3>Налоговый вычет</h3>
         </template>
@@ -47,25 +41,21 @@
             <p class="caption">Итого можете внести в качестве досрочных:</p>
             <div v-for="(price, index) in results" v-bind:key="index">
               <p class="flex" style="padding: 16px 0; border-bottom: 1px solid #DFE3E6;">
-                <Checkbox class="mr-10"/>
+                <Checkbox :val="index"
+                          v-model="componentSelectedItems"
+                          :model-value="componentSelectedItems"
+                          class="mr-10"/>
                 <span class="mr-10" style="color:black">{{ price }} рублей </span> в {{ index + 1 }} год
               </p>
             </div>
           </div>
           <div class="spacer"></div>
 
-          <div class="wrapper">
-            <span class="caption">Что уменьшаем?</span>
+          <div class="wrapper flex">
+            <span class="caption pt-7 mr-10">Что уменьшаем?</span>
             <div class="flex">
-              <div class="mr-10">
-                <label><input type="radio" id="huey" name="drone" value="0" v-model="MySelectedValues"
-                              checked> Платеж</label>
-              </div>
-
-              <div>
-                <label class=""><input type="radio" id="dewey" name="drone" value="1" v-model="MySelectedValues">
-                  Срок</label>
-              </div>
+              <Radio class="mr-10" name="options" v-model="MySelectedValue" :value="1" :model-value="MySelectedValue" label="Платеж"/>
+              <Radio name="options" v-model="MySelectedValue" :value="2" :model-value="MySelectedValue" label="Срок"/>
             </div>
           </div>
         </template>
@@ -80,24 +70,24 @@ import Modal from "../components/Modal";
 import ButtonText from "../components/input/ButtonText";
 import BaseInput from "../components/input/BaseInput";
 import Checkbox from "../components/input/Checkbox";
+import Radio from "../components/input/Radio";
 
 export default {
   name: "Calculator",
-  components: { Checkbox, BaseInput, ButtonText, Modal, Button },
+  components: { Radio, Checkbox, BaseInput, ButtonText, Modal, Button },
   data () {
     return {
       showModal: false,
       price: 2000000,
       salary: '',
       MySelectedValues: 0,
+      MySelectedValue: 1,
       isShowResult: false,
       results: [],
+      componentSelectedItems: [],
     }
   },
   methods: {
-    toggled () {
-      this.showModal = false;
-    },
     calculate () {
       let maxTaxDeduction = 0;
       if (this.price < 2000000) {
@@ -141,7 +131,7 @@ export default {
 }
 
 .result--wrapper {
-  height: 300px;
+  height: 252px;
   overflow-y: scroll;
 }
 </style>
